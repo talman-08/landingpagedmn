@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Affiliate Landing Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    header {
+      background: #0077cc;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 12px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>First Affiliate</h1>
+    <p>Join now to unlock our products!</p>
+  </header>
+
+  <div class="container">
+    <h2>Subscribe to Get Access</h2>
+    <form id="subscribeForm">
+      <input type="text" id="name" placeholder="Enter your name" required />
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <button type="submit">Get Access</button>
+    </form>
+    <div class="message" id="message"></div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBrSmU_4-mRwpgweh1w94db41zS-5COiZo",
+      authDomain: "landingpagedmn.firebaseapp.com",
+      projectId: "landingpagedmn",
+      storageBucket: "landingpagedmn.firebasestorage.app",
+      messagingSenderId: "1672970286",
+      appId: "1:1672970286:web:8b65ab9e8a83aa55a3dfbf",
+      measurementId: "G-KRG92EM6N9"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Handle form submission
+    const form = document.getElementById("subscribeForm");
+    const messageDiv = document.getElementById("message");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+
+      try {
+        // Save to Firestore (collection: "subscribers")
+        await addDoc(collection(db, "subscribers"), {
+          name: name,
+          email: email,
+          timestamp: new Date()
+        });
+
+        messageDiv.textContent = "✅ Thank you! You now have access.";
+        messageDiv.style.color = "green";
+        form.reset();
+
+        // Redirect to affiliate page after submit
+        setTimeout(() => {
+          window.location.href = "https://your-affiliate-link.com";
+        }, 2000);
+
+      } catch (error) {
+        console.error("Error saving data:", error);
+        messageDiv.textContent = "❌ Something went wrong. Try again.";
+        messageDiv.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>
