@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BestProductDMN — Affiliate Deals</title>
+
+  <style>
+    :root{
+      --brand:#0d6efd; --brand-dark:#0a58ca; --ok:#22c55e; --bg:#f6f7fb; --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg); color:#111;
+    }
+    /* Nav */
+    nav{
+      position:sticky; top:0; z-index:50; background:#111; color:#fff; border-bottom:1px solid #222;
+    }
+    .navwrap{
+      max-width:1100px; margin:auto; display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px;
+    }
+    .logo{font-weight:700; letter-spacing:.3px}
+    .logo a{color:#fff; text-decoration:none}
+    .navlinks{display:flex; gap:16px; align-items:center}
+    .navlinks a{color:#ccc; text-decoration:none; font-size:14px}
+    .navlinks a:hover{color:#fff}
+
+    /* Hero */
+    header.hero{
+      background:linear-gradient(135deg, #4facfe, #00f2fe);
+      color:#fff; text-align:center; padding:72px 16px 48px;
+    }
+    header.hero h1{margin:0 0 10px; font-size:40px}
+    header.hero p{margin:0 0 22px; font-size:18px; opacity:.95}
+
+    /* Form */
+    .signup{
+      background:var(--card); color:#111; width:min(680px, 92vw); margin:0 auto; padding:18px;
+      border-radius:14px; box-shadow:0 8px 20px rgba(0,0,0,.08);
+      display:grid; grid-template-columns:1fr 1fr auto; gap:10px;
+    }
+    .signup input{
+      padding:12px 12px; border:1px solid #dfe3ea; border-radius:10px; font-size:15px; outline:none;
+    }
+    .signup button{
+      padding:12px 16px; border:none; border-radius:10px; background:var(--brand); color:#fff; font-weight:600; cursor:pointer;
+    }
+    .signup button:hover{background:var(--brand-dark)}
+    .fineprint{max-width:680px; margin:10px auto 0; font-size:12px; opacity:.9}
+
+    /* Products */
+    main{max-width:1100px; margin:40px auto; padding:0 16px}
+    .products-head{display:flex; align-items:end; gap:16px; justify-content:space-between; margin-bottom:10px}
+    .products-head h2{margin:0}
+    .lockbadge{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:#111; color:#fff; font-size:12px}
+    .grid{
+      display:flex; flex-wrap:wrap; gap:18px; justify-content:center;
+    }
+    .card{
+      width:280px; background:var(--card); border-radius:14px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.08);
+      display:flex; flex-direction:column;
+    }
+    .card img, .card video{width:100%; height:auto; display:block}
+    .card .content{padding:14px}
+    .card h3{margin:4px 0 6px; font-size:18px}
+    .card p{margin:0 0 10px; color:#444; font-size:14px}
+    .btn{
+      display:inline-block; text-decoration:none; background:var(--brand); color:#fff; padding:10px 14px; border-radius:10px; font-weight:600;
+    }
+    .btn:hover{background:var(--brand-dark)}
+
+    /* Lock overlay */
+    .locked{
+      position:relative; filter:blur(2px) grayscale(.2); pointer-events:none; user-select:none;
+    }
+    .lockoverlay{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      background:rgba(17,17,17,.55); color:#fff; font-weight:700; border-radius:14px;
+    }
+
+    /* Messages */
+    #msg{max-width:680px; margin:12px auto 0; text-align:center; font-weight:600}
+    .ok{color:var(--ok)} .err{color:#dc2626}
+
+    /* Responsive form stack */
+    @media (max-width:720px){
+      .signup{grid-template-columns:1fr; gap:8px}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav>
+    <div class="navwrap">
+      <div class="logo"><a href="/">Nobina-dahir</a></div>
+      <div class="navlinks">
+        <a href="#deals">Deals</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO + SIGNUP -->
+  <header class="hero">
+    <h1>Exclusive Affiliate Deals</h1>
+    <p>Join free to unlock hand-picked products, discounts, and early-bird offers.</p>
+
+    <form id="signupForm" class="signup" autocomplete="on" novalidate>
+      <input id="name" name="name" type="text" placeholder="Your name" minlength="2" required />
+      <input id="email" name="email" type="email" placeholder="Your email" required />
+      <button type="submit" id="submitBtn">Unlock Access</button>
+    </form>
+    <div class="fineprint">By subscribing you agree to receive occasional emails. You can unsubscribe anytime.</div>
+    <div id="msg"></div>
+  </header>
+
+  <!-- PRODUCTS -->
+  <main id="deals">
+    <div class="products-head">
+      <h2>Featured Products</h2>
+      <span id="lockBadge" class="lockbadge">🔒 Locked — subscribe to unlock</span>
+    </div>
+
+    <div id="productsWrap" class="grid locked">
+      <!-- Lock overlay -->
+      <div class="lockoverlay">Subscribe above to unlock</div>
+
+      <!-- Product 1 (image) -->
+      <article class="card">
+        <img src="https://via.placeholder.com/640x400?text=Product+One" alt="Product One" />
+        <div class="content">
+          <h3>Product One</h3>
+          <p>Best-seller with huge discount. Limited time only.</p>
+          <a class="btn" href="https://your-affiliate-link-1.example" target="_blank" rel="noopener">Buy Now</a>
+        </div>
+      </article>
+
+      <!-- Product 2 (video) -->
+      <article class="card">
+        <video controls preload="metadata" poster="https://via.placeholder.com/640x400?text=Product+Two+Video">
+          <source src="product2.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="content">
+          <h3>Product Two</h3>
+          <p>Short demo — see it in action before you buy.</p>
+          <a class="btn" href="https://your-affiliate-link-2.example" target="_blank" rel="noopener">View Deal</a>
+        </div>
+      </article>
+
+      <!-- Product 3 (image) -->
+      <article class="card">
+        <img src="https://via.placeholder.com/640x400?text=Product+Three" alt="Product Three" />
+        <div class="content">
+          <h3>Product Three</h3>
+          <p>Exclusive offer for subscribers only.</p>
+          <a class="btn" href="https://your-affiliate-link-3.example" target="_blank" rel="noopener">Check Offer</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- One-file JS (Firebase + logic) -->
+  <script type="module">
+    // ---------- Firebase SDK (ES modules from CDN) ----------
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // ---------- Your Firebase config (REPLACE THESE!) ----------
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // ---------- Init Firebase ----------
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    // ---------- UI helpers ----------
+    const $ = (sel)=>document.querySelector(sel);
+    const productsWrap = $("#productsWrap");
+    const lockBadge    = $("#lockBadge");
+    const msg          = $("#msg");
+    const form         = $("#signupForm");
+    const submitBtn    = $("#submitBtn");
+
+    function unlockProducts() {
+      productsWrap.classList.remove("locked");
+      const overlay = productsWrap.querySelector(".lockoverlay");
+      if (overlay) overlay.remove();
+      lockBadge.textContent = "✅ Unlocked — enjoy the deals";
+    }
+
+    // Persist unlocked state for returning visitors
+    if (localStorage.getItem("affiliate_unlocked") === "yes") {
+      unlockProducts();
+    }
+
+    // ---------- Form handler ----------
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "";
+      msg.className = "";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Saving…";
+
+      const name = (document.getElementById("name").value || "").trim();
+      const email = (document.getElementById("email").value || "").trim();
+
+      // basic validation
+      if (name.length < 2) {
+        msg.textContent = "Please enter your full name.";
+        msg.className = "err";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Unlock Access";
+        return;
+      }
+      // HTML5 email input already validates format; double-check empties:
+      if (!email) {
+        msg.textContent = "Please enter a valid email address.";
+        msg.className = "err";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Unlock Access";
+        return;
+      }
+
+      try {
+        // Save to Firestore → collection: subscribers
+        await addDoc(collection(db, "subscribers"), {
+          name,
+          email,
+          source: "bestproductdmn-landing",
+          createdAt: serverTimestamp()
+        });
+
+        // Success UX
+        msg.textContent = `Thanks, ${name}! Access unlocked.`;
+        msg.className = "ok";
+        unlockProducts();
+        localStorage.setItem("affiliate_unlocked", "yes");
+        form.reset();
+
+        // Optional: scroll to products
+        document.getElementById("deals").scrollIntoView({ behavior:"smooth", block:"start" });
+
+      } catch (err) {
+        console.error(err);
+        msg.textContent = "Could not save your details. Please try again.";
+        msg.className = "err";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Unlock Access";
+      }
+    });
+  </script>
+</body>
+</html>
