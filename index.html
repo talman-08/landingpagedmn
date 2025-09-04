@@ -3,82 +3,177 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Landing Page</title>
+  <title>Cheap and Quality DMN</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    form { max-width: 400px; margin: auto; }
-    input, button { padding: 10px; margin: 5px 0; width: 100%; }
-    #loadingMsg { color: orange; display: none; }
-    #message { margin-top: 10px; font-weight: bold; }
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #f9f9f9; 
+    }
+    header {
+      background: #222;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ff9800;
+    }
+    .logo {
+      width: 60px;
+      height: auto;
+    }
+    .container {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 { color: #333; }
+    p { line-height: 1.6; color: #555; }
+
+    /* Contact Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 500px;
+    }
+    input, textarea, button {
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+    button {
+      background: #222;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #ff9800;
+    }
+
+    /* Sections hidden by default */
+    .section { display: none; }
+    .active { display: block; }
+
+    /* Landing Page */
+    #landing {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    #landing input {
+      margin: 10px 0;
+      max-width: 400px;
+    }
   </style>
 </head>
 <body>
-  <h1>Subscribe to Our Newsletter</h1>
-  <form id="subscribeForm">
-    <input type="text" id="name" placeholder="Your Name" required />
-    <input type="email" id="email" placeholder="Your Email" required />
-    <button type="submit" id="submitBtn">Subscribe</button>
-  </form>
 
-  <p id="loadingMsg">⏳ Saving your info...</p>
-  <p id="message"></p>
+  <!-- Header + Navbar -->
+  <header>
+    <h1>Cheap & Quality DMN</h1>
+    <nav>
+      <a href="#" onclick="showSection('home')">Home</a>
+      <a href="#" onclick="showSection('products')">Products</a>
+      <a href="#" onclick="showSection('about')">About</a>
+      <a href="#" onclick="showSection('contact')">Contact</a>
+      <img src="https://via.placeholder.com/60x60?text=Logo" alt="Logo" class="logo">
+    </nav>
+  </header>
 
-  <!-- Firebase SDKs -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+  <!-- Landing Page -->
+  <div id="landing" class="active">
+    <h2>Welcome to Cheap and Quality DMN</h2>
+    <p>Enter your details to access exclusive offers and content.</p>
+    <form id="landingForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <button type="submit">Enter Website</button>
+    </form>
+  </div>
 
-    // 🔑 Your Firebase Config
-    const firebaseConfig = {
-      apiKey: "YOUR_FIREBASE_API_KEY",
-      authDomain: "YOUR_FIREBASE_PROJECT.firebaseapp.com",
-      projectId: "YOUR_FIREBASE_PROJECT",
-      storageBucket: "YOUR_FIREBASE_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
+  <!-- Main Website -->
+  <div id="mainContent" style="display:none;">
+    <!-- Home -->
+    <section id="home" class="section active container">
+      <h2>Welcome to Our Store</h2>
+      <p>Discover high-quality products at the most affordable prices. We connect you with the best deals online.</p>
+      <img src="https://via.placeholder.com/800x400?text=Featured+Product" alt="Product Image" style="width:100%;border-radius:10px;margin:20px 0;">
+      <video controls style="width:100%;border-radius:10px;">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support video.
+      </video>
+    </section>
 
-    // 🔥 Init Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    <!-- Products -->
+    <section id="products" class="section container">
+      <h2>Our Products</h2>
+      <p>We bring you hand-picked affiliate deals that save you money while ensuring quality.</p>
+      <ul>
+        <li>✔️ Affordable Electronics</li>
+        <li>✔️ Fashion & Accessories</li>
+        <li>✔️ Health & Wellness</li>
+        <li>✔️ Home & Kitchen</li>
+      </ul>
+    </section>
 
-    // 🔽 Form Handling
-    const form = document.getElementById("subscribeForm");
-    const submitBtn = document.getElementById("submitBtn");
-    const loadingMsg = document.getElementById("loadingMsg");
-    const messageEl = document.getElementById("message");
+    <!-- About -->
+    <section id="about" class="section container">
+      <h2>About Cheap and Quality DMN</h2>
+      <p>Cheap and Quality DMN is an affiliate platform dedicated to bringing our customers premium products at unbeatable prices. Our mission is to make shopping easy, affordable, and trustworthy.</p>
+    </section>
 
-    form.addEventListener("submit", async (e) => {
+    <!-- Contact -->
+    <section id="contact" class="section container">
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Landing form -> unlock site
+    document.getElementById("landingForm").addEventListener("submit", function(e) {
       e.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-
-      if (!name || !email) {
-        messageEl.textContent = "⚠️ Please enter both name and email.";
-        return;
-      }
-
-      submitBtn.disabled = true;
-      loadingMsg.style.display = "block";
-      messageEl.textContent = "";
-
-      try {
-        await addDoc(collection(db, "subscribers"), {
-          name: name,
-          email: email,
-          timestamp: new Date()
-        });
-        messageEl.textContent = "✅ Thank you for subscribing!";
-        form.reset();
-      } catch (error) {
-        console.error("Error adding document:", error);
-        messageEl.textContent = "❌ Something went wrong. Please try again.";
-      } finally {
-        submitBtn.disabled = false;
-        loadingMsg.style.display = "none";
-      }
+      document.getElementById("landing").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+      showSection("home");
     });
+
+    // Switch sections
+    function showSection(sectionId) {
+      document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(sectionId).classList.add("active");
+    }
   </script>
+
 </body>
 </html>

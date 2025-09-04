@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cheap & Quality DMN</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f9f9f9; }
+    header { background: #333; color: white; padding: 15px; text-align: center; }
+    nav { background: #444; padding: 10px; display: flex; justify-content: center; gap: 20px; }
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    section { padding: 40px; }
+    h1, h2 { color: #333; }
+    form { max-width: 400px; margin: auto; display: flex; flex-direction: column; }
+    input, textarea, button {
+      padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;
+    }
+    button { background: #333; color: white; border: none; cursor: pointer; }
+    button:hover { background: #555; }
+    #landing { text-align: center; padding: 60px; }
+    #website { display: none; }
+    .product { background: white; padding: 20px; margin: 20px auto; max-width: 600px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .product img { max-width: 100%; border-radius: 8px; }
+    footer { background: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+  <!-- Landing Page -->
+  <div id="landing">
+    <h1>Welcome to Cheap & Quality DMN</h1>
+    <p>Subscribe with your name & email to unlock our full website instantly.</p>
+    <form id="subscribeForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <button type="submit">Unlock Website</button>
+    </form>
+    <p id="message"></p>
+  </div>
+
+  <!-- Full Website -->
+  <div id="website">
+    <header>
+      <h1>Cheap & Quality DMN</h1>
+      <p>Your gateway to affordable and quality products</p>
+    </header>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="home">
+      <h2>🏠 Welcome</h2>
+      <p>We bring you the **best affiliate products** at affordable prices. Discover amazing deals, high-quality goods, and more!</p>
+      <video controls width="400">
+        <source src="sample.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+
+    <section id="products">
+      <h2>🛍 Our Featured Products</h2>
+      <div class="product">
+        <h3>Product 1 - Amazing Gadget</h3>
+        <img src="product1.jpg" alt="Product 1">
+        <p>This gadget makes your life easier. <a href="#">Buy Now →</a></p>
+      </div>
+      <div class="product">
+        <h3>Product 2 - Quality Item</h3>
+        <img src="product2.jpg" alt="Product 2">
+        <p>Top-rated and affordable. <a href="#">Check Offer →</a></p>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>ℹ️ About Cheap & Quality DMN</h2>
+      <p>Cheapandqualitydmn is dedicated to providing **value-driven affiliate deals**. We believe quality shouldn’t be expensive — so we connect customers to the best deals worldwide.</p>
+    </section>
+
+    <section id="contact">
+      <h2>📩 Contact Us</h2>
+      <form id="contactForm">
+        <input type="text" id="cname" placeholder="Your Name" required />
+        <input type="email" id="cemail" placeholder="Your Email" required />
+        <textarea id="cmessage" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <p id="contactMsg"></p>
+    </section>
+
+    <footer>
+      <p>© 2025 Cheap & Quality DMN. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- Firebase + Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // 🔑 Replace with your Firebase config
+    const firebaseConfig = {
+      apiKey: "YOUR_FIREBASE_API_KEY",
+      authDomain: "YOUR_FIREBASE_PROJECT.firebaseapp.com",
+      projectId: "YOUR_FIREBASE_PROJECT",
+      storageBucket: "YOUR_FIREBASE_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Landing Page Form
+    const subscribeForm = document.getElementById("subscribeForm");
+    const landing = document.getElementById("landing");
+    const website = document.getElementById("website");
+    const messageEl = document.getElementById("message");
+
+    subscribeForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      try {
+        await addDoc(collection(db, "subscribers"), { name, email, timestamp: new Date() });
+        landing.style.display = "none";
+        website.style.display = "block";
+      } catch (error) {
+        console.error("Error:", error);
+        messageEl.textContent = "❌ Failed to subscribe. Try again.";
+      }
+    });
+
+    // Contact Form
+    const contactForm = document.getElementById("contactForm");
+    const contactMsg = document.getElementById("contactMsg");
+
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const cname = document.getElementById("cname").value.trim();
+      const cemail = document.getElementById("cemail").value.trim();
+      const cmessage = document.getElementById("cmessage").value.trim();
+
+      try {
+        await addDoc(collection(db, "messages"), { cname, cemail, cmessage, timestamp: new Date() });
+        contactMsg.textContent = "✅ Message sent successfully!";
+        contactForm.reset();
+      } catch (error) {
+        console.error("Error:", error);
+        contactMsg.textContent = "❌ Failed to send message.";
+      }
+    });
+  </script>
+</body>
+</html>
