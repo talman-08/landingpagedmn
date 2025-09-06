@@ -1,70 +1,41 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0; padding: 0;
-  background: #f9f9f9;
-  color: #333;
-}
-
-.navbar {
-  display: flex;
-  justify-content: center;
-  background: #222;
-  padding: 15px;
-}
-
-.navbar a {
   color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.navbar a:hover {
-  color: #ff6600;
-}
-
-.hero {
-  text-align: center;
-  padding: 50px;
-  background: #ff6600;
-  color: white;
-}
-
-.content {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-input, textarea, button {
-  margin: 10px 0;
-  padding: 12px;
+  background: green;
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 16px;
 }
 
-button {
-  background: #ff6600;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
+/* Navigation bar */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  background-color: blue;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 15px 20px;
+  z-index: 1000;
 }
 
-button:hover {
-  background: #e55b00;
+nav a {
+  color: chartreuse;
+  padding: 10px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
 }
 
+nav a:hover {
+  background: chartreuse;
+  color: blue;
+}
 
 /* Container */
-.containers {
+.container {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
@@ -109,5 +80,11 @@ button:hover {
 img {
   border-radius: 10px;
   max-width: 100%;
+  height: auto;
+}
+
+
+.logo {
+  width: 60px;
   height: auto;
 }

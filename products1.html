@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cheap and Quality DMN</title>
+
+
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #f9f9f9; 
+    }
+    header {
+      background: #222;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ff9800;
+    }
+    .logo {
+      width: 60px;
+      height: auto;
+    }
+    .container {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 { color: #333; }
+    p { line-height: 1.6; color: #555; }
+
+    /* Contact Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 500px;
+    }
+    input, textarea, button {
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+    button {
+      background: #222;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #ff9800;
+    }
+
+    /* Sections hidden by default */
+    .section { display: none; }
+    .active { display: block; }
+
+    /* Landing Page */
+    #landing {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    #landing input {
+      margin: 10px 0;
+      max-width: 400px;
+    }
+
+
+
+    .containers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 80px;
+    padding: 20px;
+    justify-content: center;
+    border: 1rem solid floralwhite;
+    }
+
+    /* Clickable box */
+    .boxen {
+      background: white;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 280px;
+      padding: 20px;
+      border: 1px solid black;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-decoration: none;   /* remove underline */
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .boxen:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .boxen h1 {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .boxen p {
+      font-size: 14px;
+      text-align: center;
+    }
+
+    img {
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Header + Navbar -->
+  <header>
+    <h1>Cheap & Quality DMN</h1>
+    <nav>
+      <a href="#" onclick="showSection('home')">Home</a>
+      <a href="#" onclick="showSection('products')">Products</a>
+      <a href="#" onclick="showSection('about')">About</a>
+      <a href="#" onclick="showSection('contact')">Contact</a>
+      <img src="https://via.placeholder.com/60x60?text=Logo" alt="Logo" class="logo">
+    </nav>
+  </header>
+
+  
+
+  <!-- Main Website -->
+  <div id="mainContent" style="display:none;">
+ 
+
+    <!-- Clickable Boxes -->
+    <section class="containers">
+      <a href="fitness.html" class="boxen">
+        <h1>Fitness Products</h1>
+        <img src="fitness-pict.png" alt="Nature Image">
+        <p>Discover the beauty of nature and landscapes.</p>
+      </a>
+
+      <a href="topic2.html" class="boxen">
+        <h1>Topic 2: Technology</h1>
+        <img src="Screen.png" alt="Tech Image">
+        <p>Learn about modern technology trends.</p>
+      </a>
+
+      <a href="topic3.html" class="boxen">
+        <h1>Topic 3: Health</h1>
+        <img src="Screen.png" alt="Health Image">
+        <p>Tips for a healthy and balanced lifestyle.</p>
+      </a>
+
+      <a href="topic4.html" class="boxen">
+        <h1>Topic 4: Education</h1>
+        <img src="Screen.png" alt="Education Image">
+        <p>Explore resources and study techniques.</p>
+      </a>
+    </section>
+
+
+ 
+
+     
+  </div>
+
+ 
+
+</body>
+</html>
